@@ -50,11 +50,10 @@ static blk_status_t queue_rq(struct blk_mq_hw_ctx *hctx, const struct blk_mq_que
 		size_t len = biovec.bv_len;
 		void *buffer = kmap_local_page(biovec.bv_page) + biovec.bv_offset;
 
-		if (rq_data_dir(rq) == WRITE) {
+		if (rq_data_dir(rq) == WRITE)
 			memcpy(dev->memory_ptr + offset, buffer, len);
-		} else {
+		 else
 			memcpy(buffer, dev->memory_ptr + offset, len);
-		}
 
 		kunmap_local(buffer);
 		offset += len;
