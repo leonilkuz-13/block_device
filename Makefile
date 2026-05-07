@@ -3,4 +3,7 @@ all:
 
 clean:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+
+check:
+	/lib/modules/$(shell uname -r)/build/scripts/checkpatch.pl --no-tree -f *.c
 	
