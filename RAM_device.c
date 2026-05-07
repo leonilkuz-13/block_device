@@ -4,7 +4,6 @@
 #include <linux/slab.h>
 #include <linux/vmalloc.h>
 
-#define SECTOR_SIZE 512
 #define DEVICE_CAPACITY 32768 // 16 MB
 
 struct ram_device
@@ -111,7 +110,6 @@ static int __init my_init(void)
     device->tag_set.queue_depth = 32;
     device->tag_set.numa_node = NUMA_NO_NODE;
     device->tag_set.cmd_size = 0;
-    device->tag_set.flags = BLK_MQ_F_SHOULD_MERGE;
     device->tag_set.nr_maps = 1;
     device->tag_set.driver_data = device;
 
@@ -129,7 +127,7 @@ static int __init my_init(void)
         goto free_tags;
     }
 
-    device->gd = blk_mq_alloc_disk(&device->tag_set, device);
+    device->gd = blk_mq_alloc_disk(&device->tag_set, NULL, device);
     if (IS_ERR(device->gd))
     {
         error = PTR_ERR(device->gd);
