@@ -116,8 +116,10 @@ If you want to understand how the driver works under the hood, here is the compl
 
 To validate the RAM_device.c source code against the Linux Kernel Coding Style, run:
 
-```bash
-make check
+    ```bash
+    make check
+    ```
+---
 
 ## License & Author
 
